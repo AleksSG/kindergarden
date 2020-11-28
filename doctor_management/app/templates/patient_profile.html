@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<a >Patient id: </a>
+<a>{{ item.id }}</a><br>
+<div class="container">
+  <div class="row">
+    <div class="image_profile">
+    <img class = "profile_img" src = "">
+    </div>
+    <div class="col1">
+        <row>
+            <a><b>Last Name</b> </a>
+            <br>
+            <a>{{ item.firstName }}</a>
+        </row>
+        <row>
+            <a><b>First Name</b></a>
+            <br>
+            <a>{{ item.lastName }}</a>
+        </row>
+        <row>
+            <a><b>Birth day </b></a><br>
+            <a>{{ item.birthday }}</a>
+        </row>
+        <row>
+            <a><b>Contact</b> </a>
+            <br>
+            <a>{{ item.contact }}</a>
+        </row>
+        <row>
+            <a><b>Relative Contact</b> </a>
+            <a>{{ item.relativeContact }}</a>
+        </row>
+    </div>
+    <div class="col2">
+      <row>
+          <b>Pathologies</b> </a>
+            <br>
+            <a>{{ item.pathologies }}</a>
+        </row>
+        <row>
+            <a><b>Other information</b> </a>
+            <a>{{ item.information }}</a>
+        </row>
+    </div>
+  </div>
+</div>
+<br>
+<button type="button" class="btn btn-primary">ADD PILL</button>
+<button href = "{% url 'patient_update' item.pk %}" type="button" class="btn btn-primary">MODIFY PROFILE</button>
+
+{% endblock %}

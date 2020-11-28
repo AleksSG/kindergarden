@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<a >Patient id: </a>
+<a>{{ item.id }}</a><br>
+<form method="POST">
+<div class="container">
+  <div class="row">
+    <div class="image_profile">
+    <img class = "profile_img" src = "">
+    </div>
+    <div class="col1">
+        <row>
+            <a><b>Last Name</b> </a>
+            <br>
+            <input type="text" value="">
+        </row>
+        <row>
+            <a><b>First Name</b></a>
+            <br>
+            <input type="text" value="">
+        </row>
+        <row>
+            <a><b>Birth day </b></a><br>
+            <input type="text" value="">
+        </row>
+        <row>
+            <a><b>Contact</b> </a>
+            <br>
+            <input type="text" value="">
+        </row>
+        <row>
+            <a><b>Relative Contact</b> </a>
+            <input type="text" value="">
+        </row>
+    </div>
+    <div class="col2">
+      <row>
+          <b>Pathologies</b> </a>
+            <br>
+            <input type="text" value="">
+        </row>
+        <row>
+            <a><b>Other information</b> </a>
+            <input type="text" value="">
+        </row>
+    </div>
+  </div>
+</div>
+<br>
+<button type="submit" class="btn btn-primary" name="button">SAVE</button>
+</form>
+{% endblock %}
