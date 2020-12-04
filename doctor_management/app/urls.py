@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import index, signup, patient_information
+from .views import *
 
 urlpatterns = [
     url(r'^$', index, name='index'),
