@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import *
 
@@ -27,4 +27,4 @@ def patient_update(request, pk):
             return redirect('patient_profile') #do I have to add the item? for identifying which patient I am looking at
     else:
         form = PatientForm(instance = item)
-        return render(request, 'patient_update', {'form' : form})
+        return render(request, 'patient_update.html', {'form' : form})
