@@ -12,12 +12,12 @@
     <div class="col1">
         <row>
             <a><b>Last Name</b> </a>
-            <a>{{ item.firstName }}</a>
+            <a>{{ item.lastName }}</a>
         </row>
         <br>
         <row>
             <a><b>First Name</b></a>
-            <a>{{ item.lastName }}</a>
+            <a>{{ item.firstName }}</a>
         </row>
         <br>
         <row>
@@ -50,7 +50,7 @@
   </div>
 </div>
 <br>
-<button type="button" class="btn btn-primary">ADD PILL</button>
+<a href = "{% url 'prescription_add' item.pk %}" role="button" class="btn btn-primary" role="button">ADD PRESCRIPTION</a>
 <a href = "{% url 'patient_update' item.pk %}" role="button" class="btn btn-primary" role="button">MODIFY PROFILE</a>
 
 {% endblock %}

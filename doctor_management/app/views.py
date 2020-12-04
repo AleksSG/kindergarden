@@ -19,12 +19,21 @@ def patient_profile(request, pk):
 
 def patient_update(request, pk):
     item = get_object_or_404(Patient, pk = pk)
+    context = {
+        'item' : item
+    }
 
     if request.method == "POST":
         form = PatientForm(request.POST, instance =item)
         if form.is_valid():
             form.save()
-            return redirect('patient_profile') #do I have to add the item? for identifying which patient I am looking at
+            return redirect('patient_profile', pk = pk)
+
     else:
         form = PatientForm(instance = item)
         return render(request, 'patient_update.html', {'form' : form})
+
+
+
+def prescription_add(request):
+    return render(request, 'prescription_add.html')
