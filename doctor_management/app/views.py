@@ -5,7 +5,20 @@ from .forms import *
 # Create your views here.
 
 def index(request):
-    return render(request, 'index.html')
+    items = Patient.objects.all()
+    context = {
+        'items' : items,
+    }
+    return render(request, 'index.html', context)
+
+def search(request):
+    search_term = request.GET['search']
+    if search_term != '':
+        items = Patient.objects.filter(lastName__startswith = search_term)
+        return render(request, 'index.html', {'items':items})
+    else:
+        items = Patient.objects.all()
+        return render(request, 'index.html', {'items':items})
 
 def signup(request):
     return render(request, 'signup.html')
@@ -22,13 +35,11 @@ def patient_update(request, pk):
     context = {
         'item' : item
     }
-
     if request.method == "POST":
         form = PatientForm(request.POST, instance =item)
         if form.is_valid():
             form.save()
             return redirect('patient_profile', pk = pk)
-
     else:
         form = PatientForm(instance = item)
         return render(request, 'patient_update.html', {'form' : form})
