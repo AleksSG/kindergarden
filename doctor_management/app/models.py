@@ -29,6 +29,7 @@ class Pill(models.Model):
         return 'Pill: {0}'
 
 class Prescription(models.Model):
+    idPatient = models.IntegerField ()
     pill = models.ForeignKey(Pill, on_delete=models.CASCADE)
     duration = models.CharField(max_length=100, blank=True)
     frequency = models.CharField(max_length=100, blank=True)

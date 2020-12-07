@@ -7,7 +7,7 @@ class PatientForm(forms.ModelForm):
         fields = ('lastName', 'firstName', 'birthday', 'contact', 'relativeContact', 'pathologies', 'information')
 
 
-class PillForm(forms.ModelForm):
+class PrescriptionForm(forms.ModelForm):
     class Meta:
-        model = Pill
-        fields = ('name', 'description', 'picture', 'otherFill')
+        model = Prescription
+        fields = ('idPatient', 'pill', 'duration', 'frequency', 'quantity', 'otherFill')
