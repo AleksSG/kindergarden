@@ -56,3 +56,8 @@ def prescription_add(request, pk):
     else:
         form = PrescriptionForm(request.POST)
         return render(request, 'patient_update.html', {'form' : form})
+
+
+def api_login(request):
+    if request.method == "POST":
+        print("Worksss")
