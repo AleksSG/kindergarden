@@ -45,6 +45,14 @@ def patient_update(request, pk):
         return render(request, 'patient_update.html', {'form' : form})
 
 
+def prescription_add(request, pk):
 
-def prescription_add(request):
-    return render(request, 'prescription_add.html')
+    if request.method == "POST":
+        form = PrescriptionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('patient_profile', pk = pk)
+
+    else:
+        form = PrescriptionForm(request.POST)
+        return render(request, 'patient_update.html', {'form' : form})
