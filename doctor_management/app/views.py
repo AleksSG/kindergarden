@@ -30,6 +30,19 @@ def patient_profile(request, pk):
     }
     return render(request, 'patient_profile.html', context)
 
+
+def patient_add(request):
+    if request.method == "POST":
+        form = PatientForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+
+    else:
+        form = PatientForm()
+        return render(request, 'patient_add.html', {'form': form})
+
 def patient_update(request, pk):
     item = get_object_or_404(Patient, pk = pk)
     context = {
