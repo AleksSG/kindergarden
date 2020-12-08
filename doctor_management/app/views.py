@@ -59,16 +59,15 @@ def patient_update(request, pk):
 
 
 def prescription_add(request, pk):
-
     if request.method == "POST":
         form = PrescriptionForm(request.POST)
         if form.is_valid():
-            form.save()
+            f = form.save()
+            Patient.objects.get(pk = pk).prescription.add(f)
             return redirect('patient_profile', pk = pk)
-
     else:
-        form = PrescriptionForm(request.POST)
-        return render(request, 'patient_update.html', {'form' : form})
+        form = PrescriptionForm()
+        return render(request, 'prescription_add.html', {'form' : form})
 
 
 def api_login(request):

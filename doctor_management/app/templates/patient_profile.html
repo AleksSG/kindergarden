@@ -61,18 +61,16 @@
       </tr>
     </thead>
     <tbody>
-        
+        {% for items in item.prescription.all %}
       <tr>
-        <td> </td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{items.pill.name}} </td>
+        <td>{{items.duration}}</td>
+        <td>{{items.frequency}}</td>
+        <td>{{items.quantity}}</td>
+        <td>{{items.otherFill}}</td>
         <td><a href="" role="button" class="btn btn-warning btn-sm">SEE</a></td>
       </tr>
-  
+        {% endfor %}
     </tbody>
   </table>
 
