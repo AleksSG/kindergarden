@@ -2,7 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import *
 
-# Create your views here.
+from rest_framework import viewsets
+from .serializers import DoctorSerializer, PatientSerializer, PillSerializer, PrescriptionSerializer
+from django.views.generic import ListView, DetailView
+
+
+# Create views
 
 def index(request):
     items = Patient.objects.all()
@@ -78,6 +83,20 @@ def prescription_delete(request, pk, p_pk):
     return redirect('patient_profile', pk = p_pk)
 
 
-def api_login(request):
-    if request.method == "POST":
-        print("Worksss")
+#API classes
+
+class DoctorViewSet(viewsets.ModelViewSet):
+    queryset = Doctor.objects.all()
+    serializer_class = DoctorSerializer
+
+class PatientViewSet(viewsets.ModelViewSet):
+    queryset = Patient.objects.all()
+    serializer_class = PatientSerializer
+
+class PillViewSet(viewsets.ModelViewSet):
+    queryset = Pill.objects.all()
+    serializer_class = PillSerializer
+
+class PrescriptionViewSet(viewsets.ModelViewSet):
+    queryset = Prescription.objects.all()
+    serializer_class = PrescriptionSerializer
