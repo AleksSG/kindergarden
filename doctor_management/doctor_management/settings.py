@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
-    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -71,14 +70,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'doctor_management.wsgi.application'
 
-
-# Use Django's standard `django.contrib.auth` permissions,
-# or allow read-only access for unauthenticated users.
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
-}
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
