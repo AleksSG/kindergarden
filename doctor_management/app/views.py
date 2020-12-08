@@ -69,6 +69,14 @@ def prescription_add(request, pk):
         form = PrescriptionForm()
         return render(request, 'prescription_add.html', {'form' : form})
 
+def patient_delete(request, pk):
+    Patient.objects.get(pk=pk).delete()
+    return redirect('index')
+
+def prescription_delete(request, pk, p_pk):
+    Prescription.objects.get(pk=pk).delete()
+    return redirect('patient_profile', pk = p_pk)
+
 
 def api_login(request):
     if request.method == "POST":

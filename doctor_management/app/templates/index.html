@@ -33,7 +33,9 @@
       <td>{{ item.pathologies }}</td>
       <td>{{ item.contact }}</td>
       <td>{{ item.relativeContact }}</td>
-      <td><a href="{% url 'patient_profile' item.pk %}" role="button" class="btn btn-warning btn-sm">SEE</a></td>
+      <td><a href="{% url 'patient_profile' item.pk %}" role="button" class="btn btn-warning btn-sm">SEE</a>
+          <a href="{% url 'patient_delete' item.pk %}" role="button" class="btn btn-warning btn-sm">DELETE</a>
+      </td>
     </tr>
     {% endfor %}
 

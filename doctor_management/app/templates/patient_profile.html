@@ -68,7 +68,9 @@
         <td>{{items.frequency}}</td>
         <td>{{items.quantity}}</td>
         <td>{{items.otherFill}}</td>
-        <td><a href="" role="button" class="btn btn-warning btn-sm">SEE</a></td>
+        <td><a href="" role="button" class="btn btn-warning btn-sm">SEE</a>
+          <a href="{%url 'prescription_delete' items.pk item.pk%}" role="button" class="btn btn-warning btn-sm">DELETE</a>
+        </td>
       </tr>
         {% endfor %}
     </tbody>
