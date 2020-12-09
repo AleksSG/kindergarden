@@ -54,8 +54,10 @@
     <thead>
       <tr>
         <th scope="col"> Pill Name </th>
-        <th scope="col"> Duration</th>
-        <th scope="col"> Frequency</th>
+        <th scope="col"> Duration Start</th>
+        <th scope="col"> Duration End</th>
+        <th scope="col"> Frequency Period</th>
+        <th scope="col"> Frequency Related to Period</th>
         <th scope="col"> Quantity</th>
         <th scope="col"> Other </th>
       </tr>
@@ -64,8 +66,10 @@
         {% for items in item.prescription.all %}
       <tr>
         <td>{{items.pill.name}} </td>
-        <td>{{items.duration}}</td>
-        <td>{{items.frequency}}</td>
+        <td>{{items.duration_start}}</td>
+        <td>{{items.duration_end}}</td>
+        <td>{{items.frequency_period}}</td>
+        <td>{{items.frequency_rel_period}}</td>
         <td>{{items.quantity}}</td>
         <td>{{items.otherFill}}</td>
         <td><a href="" role="button" class="btn btn-warning btn-sm">SEE</a>
