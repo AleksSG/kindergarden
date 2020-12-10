@@ -39,11 +39,12 @@ def patient_profile(request, pk):
 def patient_add(request):
     if request.method == "POST":
         form = PatientForm(request.POST)
-
         if form.is_valid():
             form.save()
             return redirect('index')
-
+        else:
+            form = PatientForm()
+            return render(request, 'patient_add.html', {'form': form})
     else:
         form = PatientForm()
         return render(request, 'patient_add.html', {'form': form})

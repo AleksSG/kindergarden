@@ -2,25 +2,35 @@
 
 {% block body %}
 
-<div class="container">
-
     <form method="POST">
-        <br>
-
         {% csrf_token %}
-
-        {% for field in form %}
-        <div class="form-group row">
-            <label for="id_{{ field.name }}" class="col-2 col-form-label"> {{ field.label }}</label>
-            <div class="col-10">
-                {{ field }}
-            </div>
-        </div>
-
-        {% endfor %}
-
-        <button type="submit" class="btn btn-primary" name="button"> Add Prescription </button>
+        <table class="table table-bordered">
+        <tr>
+            <td>Pill</td>
+            <td>{{ form.pill }}</td>
+        </tr>
+        <tr>
+            <td>Duration Period</td>
+            <td>from <input type = "date" name="duration_start" value="{{ form.duration_start|date:'%Y-%m-%d' }}" >
+               to <input type="date" name="duration_end"value="{{ form.duration_end|date:'%Y-%m-%d' }}">
+        </tr>
+        <tr>
+          <td>Frequency</td>
+          <td>{{ form.frequency_rel_period }} times a {{ form.frequency_period }}</td>
+        </tr>
+        <tr>
+          <td>Quantity per time</td>
+          <td>{{form.quantity}}</td>
+        </tr>
+        <tr>
+          <td>Other comments</td>
+          <td>{{form.otherFill}}</td>
+        </tr>
+        <tr>
+        <td><button type="submit" class="btn btn-primary" name="button"> Add Prescription </button></td>
+        </tr>
+        </table>
     </form>
-</div>
+
 
 {% endblock %}
