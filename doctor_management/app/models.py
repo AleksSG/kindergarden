@@ -2,10 +2,6 @@ from django.db import models
 
 # Create your models here.
 
-class Doctor(models.Model):
-    lastName = models.CharField(max_length=100, blank=True)
-    login = models.CharField(max_length=100, blank=True)
-    password = models.CharField(max_length=100, blank=True)
 
 class Pill(models.Model):
     name = models.CharField(max_length=100, blank=True)
@@ -13,8 +9,8 @@ class Pill(models.Model):
     picture = models.ImageField(upload_to ='Documents/')
     otherFill = models.CharField(max_length=100, blank=True)
 
-    def _str_(self):
-        return name
+    def __str__(self):
+        return self.name
 
 class Prescription(models.Model):
         #patient = models.ForeignKey(to=Patient, on_delete=models.CASCADE)
@@ -27,11 +23,24 @@ class Prescription(models.Model):
         quantity = models.IntegerField ()
         otherFill = models.CharField(max_length=100, blank=True)
 
-        def _str_(self):
-            return 'Prescription: {0}'
+        def __str__(self):
+            return self.id
+
+
+class Doctor(models.Model):
+    lastName = models.CharField(max_length=100, blank=True)
+    firstName = models.CharField(max_length=100, blank=True)
+    speciality = models.CharField(max_length=100, blank=True)
+    address = models.CharField(max_length=100, blank=True)
+    phonenumber = models.CharField(max_length=100, blank=True)
+    notes = models.CharField(max_length=100, blank=True)
+    def __str__(self):
+        return self.lastName+" "+self.firstName
 
 
 class Patient(models.Model):
+    doctors = models.ManyToManyField(Doctor, blank=True)
+    u_id = models.CharField(max_length=100, blank=True)
     email = models.CharField(max_length=100, blank=True)
     password = models.CharField(max_length=100, blank=True)
     lastName = models.CharField(max_length=100, blank=True)
@@ -43,5 +52,5 @@ class Patient(models.Model):
     information = models.CharField(max_length=100, blank=True)
     prescription = models.ManyToManyField(Prescription, blank=True)
 
-    def _str_(self):
-        return 'Client: {0}'
+    def __str__(self):
+        return self.lastName+" "+self.firstName

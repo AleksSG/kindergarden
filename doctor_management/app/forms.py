@@ -1,10 +1,6 @@
 from django import forms
 from .models import *
 
-class DoctorForm(forms.ModelForm):
-    class Meta:
-        model = Doctor
-        fields = ('login', 'password')
 
 class PatientForm(forms.ModelForm):
     class Meta:
