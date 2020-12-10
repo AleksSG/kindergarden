@@ -13,7 +13,6 @@ class Pill(models.Model):
         return self.name
 
 class Prescription(models.Model):
-        #patient = models.ForeignKey(to=Patient, on_delete=models.CASCADE)
         periods = [('daily', 'day'), ('weekly', 'week'), ('monthly', 'month')]
         pill = models.ForeignKey(to=Pill, on_delete=models.CASCADE, blank=True)
         duration_start = models.DateField()

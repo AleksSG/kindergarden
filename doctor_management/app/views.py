@@ -87,21 +87,25 @@ def prescription_delete(request, pk, p_pk):
     return redirect('patient_profile', pk = p_pk)
 
 def check_patient(request):
-
     if request.method == "POST":
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
-
         patients = Patient.objects.all()
-        list_patients = list(patients)
-        print(list_patients)
-        if body['email'] :
+        for patient in patients:
+            if patient.email == body['email'] and patient.password == body['password']:
+                return HttpResponse(status=200)
+    return HttpResponse(status=404)
 
-            return HttpResponse(status=200)
-
-        else:
-            return HttpResponse(status=404)
-
+def update_patient(request):
+    if request.method == "PATCH":
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        patients = Patient.objects.all()
+        for patient in patients:
+            if patient.email == body['email']:
+                patient.u_id = body['UID']
+                return HttpResponse(status=200)
+                
 
 #API classes
 
