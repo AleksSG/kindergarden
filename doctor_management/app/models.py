@@ -32,6 +32,8 @@ class Prescription(models.Model):
 
 
 class Patient(models.Model):
+    email = models.CharField(max_length=100, blank=True)
+    password = models.CharField(max_length=100, blank=True)
     lastName = models.CharField(max_length=100, blank=True)
     firstName = models.CharField(max_length=100, blank=True)
     birthday = models.DateField(max_length=100, blank=True)

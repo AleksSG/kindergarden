@@ -11,6 +11,7 @@ router.register(r'doctor', views.DoctorViewSet)
 router.register(r'patient', views.PatientViewSet)
 router.register(r'pill', views.PillViewSet)
 router.register(r'prescription', views.PrescriptionViewSet)
+#router.register(r'checkpatient', views.check_patient)
 
 urlpatterns = [
     url(r'^$', index, name='index'),
@@ -22,6 +23,8 @@ urlpatterns = [
     url(r'^prescription_add/(?P<pk>\d+)$', prescription_add, name = 'prescription_add'),
     url(r'^patient_delete/(?P<pk>\d+)$', patient_delete, name='patient_delete'),
     url(r'^prescription_delete/(\d+)/(\d+)$', prescription_delete, name='prescription_delete'),
+
+    url(r'checkpatient$', views.check_patient, name='check_patient'),
     
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
