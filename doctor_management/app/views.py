@@ -86,6 +86,7 @@ def prescription_delete(request, pk, p_pk):
     Prescription.objects.get(pk=pk).delete()
     return redirect('patient_profile', pk = p_pk)
 
+@csrf_exempt
 def check_patient(request):
     if request.method == "POST":
         body_unicode = request.body.decode('utf-8')
@@ -96,6 +97,7 @@ def check_patient(request):
                 return HttpResponse(status=200)
     return HttpResponse(status=404)
 
+@csrf_exempt
 def update_patient(request):
     if request.method == "PATCH":
         body_unicode = request.body.decode('utf-8')
@@ -104,8 +106,41 @@ def update_patient(request):
         for patient in patients:
             if patient.email == body['email']:
                 patient.u_id = body['UID']
+                patient.save()
                 return HttpResponse(status=200)
-                
+
+@csrf_exempt         
+def get_prescription(request, u_id):
+    if request.method == 'GET':
+        prescriptions = Patient.objects.get(u_id = u_id).prescription.objects.all()
+        days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+        arr = []
+        for item in prescriptions:
+            obj = {}
+            obj['hours'] = []
+            #default hour of the day for the first pill = 8:00 a.m.
+            if item.frequency_period == 'day':
+                obj['days'] = 'every'
+                i = 24/item.frequency_rel_period
+                for hour in range(item.frequency_rel_period):
+                    obj['hours'].append(int(8+hour*i))
+
+            else if item.frequency_period == 'week':
+                obj['hours'].append(8)
+                obj['days'] = []
+                i = 7/item.frequency_rel_period
+                for day in range(item.frequency_rel_period):
+                    obj['days'].append(days[int(i*day)])
+
+            obj['start'] = item.duration_start
+            obj['end'] = item.duration_end
+            obj['many'] = item.quantity
+            obj['other'] = item.otherFill
+            arr.append(obj)
+
+        dic = {'array': arr}
+        return JsonResponse(dic)
+
 
 #API classes
 
