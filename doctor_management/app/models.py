@@ -23,7 +23,8 @@ class Prescription(models.Model):
         otherFill = models.CharField(max_length=100, blank=True)
 
         def __str__(self):
-            return self.id
+            return str(self.id)
+
 
 
 class Doctor(models.Model):

@@ -111,21 +111,22 @@ def update_patient(request):
 
 @csrf_exempt         
 def get_prescription(request, u_id):
+    print(u_id)
     if request.method == 'GET':
-        prescriptions = Patient.objects.get(u_id = u_id).prescription.objects.all()
+        prescriptions = Patient.objects.get(u_id = u_id).prescription.all()
         days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
         arr = []
         for item in prescriptions:
             obj = {}
             obj['hours'] = []
             #default hour of the day for the first pill = 8:00 a.m.
-            if item.frequency_period == 'day':
+            if item.frequency_period == 'daily':
                 obj['days'] = 'every'
                 i = 24/item.frequency_rel_period
                 for hour in range(item.frequency_rel_period):
                     obj['hours'].append(int(8+hour*i))
 
-            else if item.frequency_period == 'week':
+            elif item.frequency_period == 'weekly':
                 obj['hours'].append(8)
                 obj['days'] = []
                 i = 7/item.frequency_rel_period

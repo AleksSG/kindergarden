@@ -26,8 +26,8 @@ urlpatterns = [
 
     url(r'checkpatient$', views.check_patient, name='check_patient'),
     url(r'updatepatient$', views.update_patient, name='update_patient'),
-    url(r'get_prescription/(\d+)$', get_prescription, name='get_prescription')
-    
+    path(r'get_prescription/<str:u_id>', get_prescription, name='get_prescription'),
+
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
