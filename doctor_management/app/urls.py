@@ -3,7 +3,7 @@ from .views import *
 from django.urls import include, path
 from rest_framework import routers
 from django.contrib.auth.models import User
-from . import views 
+from . import views
 from rest_framework import routers, serializers, viewsets
 
 router = routers.DefaultRouter()
@@ -26,8 +26,8 @@ urlpatterns = [
 
     url(r'checkpatient$', views.check_patient, name='check_patient'),
     url(r'updatepatient$', views.update_patient, name='update_patient'),
-    path(r'get_prescription/<str:u_id>', get_prescription, name='get_prescription'),
-
+    path(r'get_prescription/<str:u_id>', views.get_prescription, name='get_prescription'),
+    path(r'get_doctors/<str:u_id>', views.get_doctors, name='get_doctors'),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

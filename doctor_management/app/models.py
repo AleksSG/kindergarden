@@ -20,11 +20,12 @@ class Prescription(models.Model):
         frequency_period = models.CharField(max_length=100, choices=periods, default='weekly')
         frequency_rel_period = models.IntegerField()
         quantity = models.IntegerField ()
+        video = models.CharField(max_length=20, blank=True, default='QhGxwX9yvRA')
         otherFill = models.CharField(max_length=100, blank=True)
+
 
         def __str__(self):
             return str(self.id)
-
 
 
 class Doctor(models.Model):
