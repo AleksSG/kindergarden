@@ -4,33 +4,39 @@
 </header>
 {% load static %}
 <link rel="stylesheet" href="{% static '/css/bootstrap.min.css '%}">
-<body>
 
+  <body>
 
-<form method='POST'>
-  {% csrf_token %}
-  <table>
-    <tr>
-      <td width="20%"></td>
-      <td>
-        <center>
-    <div class="form" align="left">
-      <br><br><h1> Sign up </h1><br>
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-      <br>
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
-      <br>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-    </center>
-    </td>
-    <td width="38%"></td>
-  </tr>
-  </form>
-  </table>
-</body>
+    <nav class="navbar navbar-dark bg-primary">
+      <a class="navbar-brand" > MedicAIDion </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-text"> Welcome </span>
+      </button>
+      </nav>
+
+    <form method='POST'>
+      {% csrf_token %}
+      <table>
+        <tr>
+          <td width="20%"></td>
+            <td>
+              <div class="form">
+                <br><br><h1> Sign up </h1><br>
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <br>
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </td>
+          <td width="38%"></td>
+        </tr>
+      </table>
+    </form>
+      
+  </body>
 
   </HTML>

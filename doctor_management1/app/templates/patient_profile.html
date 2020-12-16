@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<br>
+<br><h3> Patient Profile</h3><br>
+<h5><p class="text-primary">Information</p></h5>
+<a ><b> Patient ID</b> </a>
+<a>{{ item.id }}</a><br>
 <div class="container">
-  <div class = "row">
+  <div class="row">
+    <div class="image_profile">
+    <img class = "profile_img" src = "">
+    </div>
     <div class="col1">
         <row>
             <a><b>Last Name</b> </a>
@@ -21,24 +27,18 @@
         </row>
         <br>
         <row>
-            <a><b>E-mail</b> </a>
-            <a>{{ item.email }}</a>
-        </row>
-        <br>
-        <row>
-            <a><b>Phone number</b> </a>
+            <a><b>Contact</b> </a>
             <a>{{ item.contact }}</a>
         </row>
         <br>
+        <row>
+            <a><b>Relative Contact</b> </a>
+            <a>{{ item.relativeContact }}</a>
+        </row>
     </div>
     <div class="col2">
       <row>
-          <a><b>Emergency number</b> </a>
-          <a>{{ item.relativeContact }}</a>
-      </row>
-      <br>
-      <row>
-          <a><b>Pathologies</b> </a>
+          <b>Pathologies</b> </a>
             <a>{{ item.pathologies }}</a>
         </row>
         <br>
@@ -48,9 +48,9 @@
         </row>
     </div>
   </div>
-  </div>
-
+</div>
 <br>
+<h5><p class="text-primary">Prescriptions</p></h5>
 <table class="table">
     <thead>
       <tr>
@@ -73,7 +73,7 @@
         <td>{{items.frequency_rel_period}}</td>
         <td>{{items.quantity}}</td>
         <td>{{items.otherFill}}</td>
-        <td>
+        <td><a href="" role="button" class="btn btn-warning btn-sm">SEE</a>
           <a href="{%url 'prescription_delete' items.pk item.pk%}" role="button" class="btn btn-warning btn-sm">DELETE</a>
         </td>
       </tr>
@@ -86,3 +86,4 @@
 <a href = "{% url 'patient_update' item.pk %}" role="button" class="btn btn-primary" role="button">MODIFY PROFILE</a>
 
 {% endblock %}
+
