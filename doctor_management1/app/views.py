@@ -15,44 +15,54 @@ from datetime import datetime, timedelta
 # Create views
 
 def index(request):
-    items = Patient.objects.all()
-    context = {
-        'items' : items,
-    }
-    return render(request, 'index.html', context)
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        print(form['email'].value())
+        if Doctor.objects.filter(email = form['email'].value(), password = form['password'].value()).exists():
+            doc = Doctor.objects.get(email = form['email'].value(), password = form['password'].value())
+            return render(request, 'home.html', {'items': Patient.objects.filter(doctor = doc.pk), 'dk':doc.pk})
+        else:
+            return redirect(index)
+    else:
+        return render(request, 'index.html')
 
-def search(request):
+def home(request, dk):
+    items = Patient.objects.filter(doctor = dk)
+    return render(request, 'home.html', {'items': items, 'dk' : dk})
+
+def search(request, dk):
     search_term = request.GET['search']
     if search_term != '':
-        items = Patient.objects.filter(lastName__startswith = search_term)
-        return render(request, 'index.html', {'items':items})
+        items = Patient.objects.filter(lastName__startswith = search_term, doctor = dk)
+        return render(request, 'home.html', {'items':items, 'dk':dk})
     else:
-        items = Patient.objects.all()
-        return render(request, 'index.html', {'items':items})
+        items = Patient.objects.filter(doctor = dk)
+        return render(request, 'home.html', {'items':items, 'dk':dk})
 
-def signup(request):
-    return render(request, 'signup.html')
 
 def patient_profile(request, pk):
     item = get_object_or_404(Patient, pk = pk)
     context = {
-        'item' : item
+        'item' : item,
+        'dk' : item.doctor.pk
     }
     return render(request, 'patient_profile.html', context)
 
 
-def patient_add(request):
+def patient_add(request, dk):
     if request.method == "POST":
         form = PatientForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('index')
+            pat = form.save(commit = False)
+            pat.doctor = Doctor.objects.get(pk = dk)
+            pat.save()
+            return redirect('home', dk = dk)
         else:
             form = PatientForm()
-            return render(request, 'patient_add.html', {'form': form})
+            return render(request, 'patient_add.html', {'form': form, 'dk':dk})
     else:
         form = PatientForm()
-        return render(request, 'patient_add.html', {'form': form})
+        return render(request, 'patient_add.html', {'form': form, 'dk':dk})
 
 def patient_update(request, pk):
     item = get_object_or_404(Patient, pk = pk)
@@ -63,7 +73,7 @@ def patient_update(request, pk):
             return redirect('patient_profile', pk = pk)
     else:
         form = PatientForm(instance = item)
-        return render(request, 'patient_update.html', {'form' : form})
+        return render(request, 'patient_update.html', {'form' : form, 'dk' : item.doctor.pk})
 
 
 def prescription_add(request, pk):
@@ -75,7 +85,8 @@ def prescription_add(request, pk):
             return redirect('patient_profile', pk = pk)
     else:
         form = PrescriptionForm()
-        return render(request, 'prescription_add.html', {'form' : form})
+        dk = Patient.objects.get(pk = pk).doctor.pk
+        return render(request, 'prescription_add.html', {'form' : form, 'dk': dk})
 
 def patient_delete(request, pk):
     Patient.objects.get(pk=pk).delete()

@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<a >Patient id: </a>
+<a>{{ item.id }}</a><br>
+<div class="container">
+  <div class="row">
+    <div class="image_profile">
+    <img class = "profile_img" src = "">
+    </div>
+    <div class="col1">
+        <row>
+            <a><b>Last Name</b> </a>
+            <a>{{ item.lastName }}</a>
+        </row>
+        <br>
+        <row>
+            <a><b>First Name</b></a>
+            <a>{{ item.firstName }}</a>
+        </row>
+        <br>
+        <row>
+            <a><b>Birth day </b></a><br>
+            <a>{{ item.birthday }}</a>
+        </row>
+        <br>
+        <row>
+            <a><b>Contact</b> </a>
+            <br>
+            <a>{{ item.contact }}</a>
+        </row>
+        <br>
+        <row>
+            <a><b>Relative Contact</b> </a>
+            <a>{{ item.relativeContact }}</a>
+        </row>
+    </div>
+    <div class="col2">
+      <row>
+          <b>Pathologies</b> </a>
+            <br>
+            <a>{{ item.pathologies }}</a>
+        </row>
+        <row>
+            <a><b>Other information</b> </a>
+            <a>{{ item.information }}</a>
+        </row>
+    </div>
+  </div>
+</div>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col"> Pill Name </th>
+        <th scope="col"> Duration Start</th>
+        <th scope="col"> Duration End</th>
+        <th scope="col"> Frequency Period</th>
+        <th scope="col"> Frequency Related to Period</th>
+        <th scope="col"> Quantity</th>
+        <th scope="col"> Other </th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for items in item.prescription.all %}
+      <tr>
+        <td>{{items.pill.name}} </td>
+        <td>{{items.duration_start}}</td>
+        <td>{{items.duration_end}}</td>
+        <td>{{items.frequency_period}}</td>
+        <td>{{items.frequency_rel_period}}</td>
+        <td>{{items.quantity}}</td>
+        <td>{{items.otherFill}}</td>
+        <td><a href="" role="button" class="btn btn-warning btn-sm">SEE</a>
+          <a href="{%url 'prescription_delete' items.pk item.pk%}" role="button" class="btn btn-warning btn-sm">DELETE</a>
+        </td>
+      </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+<br>
+<a href = "{% url 'prescription_add' item.pk %}" role="button" class="btn btn-primary" role="button">ADD PRESCRIPTION</a>
+<a href = "{% url 'patient_update' item.pk %}" role="button" class="btn btn-primary" role="button">MODIFY PROFILE</a>
+
+{% endblock %}
