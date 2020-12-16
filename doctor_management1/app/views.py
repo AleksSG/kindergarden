@@ -13,7 +13,9 @@ import json
 from datetime import datetime, timedelta
 
 # Create views
+#each view is associated with a HTML page on the front-end part
 
+#controls doctor login
 def index(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -30,6 +32,7 @@ def home(request, dk):
     items = Patient.objects.filter(doctor = dk)
     return render(request, 'home.html', {'items': items, 'dk' : dk})
 
+#search bar filtering the patients, based on the lastName search criteria
 def search(request, dk):
     search_term = request.GET['search']
     if search_term != '':
@@ -38,6 +41,19 @@ def search(request, dk):
     else:
         items = Patient.objects.filter(doctor = dk)
         return render(request, 'home.html', {'items':items, 'dk':dk})
+
+def doc_profile(request, dk):
+    item = get_object_or_404(Doctor, pk = dk)
+    if request.method == 'POST':
+        form = DoctorForm(request.POST, instance = item)
+        if form.is_valid():
+            form.save()
+            return redirect('home', dk = dk)
+        else:
+            return redirect('doc_profile', dk = dk)
+    else:
+        form = DoctorForm(instance = item)
+        return render(request, 'doc_profile.html', {'form': form, 'dk':dk})
 
 
 def patient_profile(request, pk):
@@ -71,6 +87,8 @@ def patient_update(request, pk):
         if form.is_valid():
             form.save()
             return redirect('patient_profile', pk = pk)
+        else:
+            return redirect('patient_update', pk = pk)
     else:
         form = PatientForm(instance = item)
         return render(request, 'patient_update.html', {'form' : form, 'dk' : item.doctor.pk})
@@ -96,9 +114,10 @@ def prescription_delete(request, pk, p_pk):
     Prescription.objects.get(pk=pk).delete()
     return redirect('patient_profile', pk = p_pk)
 
+#functions required from the smartphone application
+
 @csrf_exempt
 def check_patient(request):
-    print("bruh")
     if request.method == "POST":
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)

@@ -3,13 +3,8 @@
 {% block body %}
 <br><h3> Patient Profile</h3><br>
 <h5><p class="text-primary">Information</p></h5>
-<a ><b> Patient ID</b> </a>
-<a>{{ item.id }}</a><br>
 <div class="container">
   <div class="row">
-    <div class="image_profile">
-    <img class = "profile_img" src = "">
-    </div>
     <div class="col1">
         <row>
             <a><b>Last Name</b> </a>
@@ -74,7 +69,6 @@
         <td>{{items.quantity}}</td>
         <td>{{items.otherFill}}</td>
         <td><a href="" role="button" class="btn btn-warning btn-sm">SEE</a>
-          <a href="{%url 'prescription_delete' items.pk item.pk%}" role="button" class="btn btn-warning btn-sm">DELETE</a>
         </td>
       </tr>
         {% endfor %}
@@ -86,4 +80,3 @@
 <a href = "{% url 'patient_update' item.pk %}" role="button" class="btn btn-primary" role="button">MODIFY PROFILE</a>
 
 {% endblock %}
-

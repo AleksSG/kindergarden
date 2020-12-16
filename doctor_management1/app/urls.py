@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^search/(?P<dk>\d+)$', search, name='search'),
     url(r'^home/(?P<dk>\d+)$', home, name = 'home'),
+    url(r'^doc_profile/(?P<dk>\d+)$', doc_profile, name='doc_profile'),
     url(r'^patient_profile/(?P<pk>\d+)$', patient_profile, name = 'patient_profile'),
     url(r'^patient_add/(?P<dk>\d+)$', patient_add, name = 'patient_add'),
     url(r'^patient_update/(?P<pk>\d+)$', patient_update, name = 'patient_update'),

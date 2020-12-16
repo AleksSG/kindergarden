@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container">
+
+    <form action="" method="POST">
+        <br>
+
+        {% csrf_token %}
+
+        <table>
+        <tr>
+          <td>Last Name</td>
+          <td>{{ form.lastName }}</td>
+        </tr>
+        <tr>
+          <td>First Name</td>
+          <td>{{form.firstName}}</td>
+        </tr>
+        <tr>
+          <td>Speciality</td>
+          <td>{{form.speciality}}</td>
+        </tr>
+        <tr>
+          <td>Telephone number</td>
+          <td>{{form.phonenumber}}</td>
+        </tr>
+        <tr>
+          <td>E-mail</td>
+          <td>{{form.email}}</td>
+        </tr>
+        <tr>
+          <td>Password</td>
+          <td>{{form.password}}</td>
+        </tr>
+        <tr>
+          <td>Notes</td>
+          <td>{{form.notes}}</td>
+        </tr>
+        <tr>
+        <td><button type="submit" class="btn btn-primary" name="button">Update profile</button></td>
+        </tr>
+        </table>
+    </form>
+</div>
+
+{% endblock %}

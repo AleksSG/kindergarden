@@ -6,6 +6,11 @@ class LoginForm(forms.ModelForm):
         model = Doctor
         fields = ('email', 'password')
 
+class DoctorForm(forms.ModelForm):
+    class Meta:
+        model = Doctor
+        fields = ('lastName', 'firstName', 'speciality', 'phonenumber', 'address', 'email', 'password', 'notes')
+
 class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
