@@ -219,10 +219,8 @@ def get_prescription(request, u_id):
 
 def get_doctors(request, u_id):
     if request.method == 'GET':
-        doctors = Patient.objects.get(u_id = u_id).doctors.all()
-        arr = []
-        for doc in doctors:
-            arr.append({
+        doc = Patient.objects.get(u_id = u_id).doctor
+        return JsonResponse({
                 'lastName' : doc.lastName,
                 'firstName' : doc.firstName,
                 'speciality' : doc.speciality,
@@ -230,7 +228,6 @@ def get_doctors(request, u_id):
                 'phone' : doc.phonenumber,
                 'notes' : doc.notes
             })
-        return JsonResponse({'array' : arr})
 
 
 #API classes
